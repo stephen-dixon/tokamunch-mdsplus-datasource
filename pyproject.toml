@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel", "setuptools_scm[toml]>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tokamunch-mdsplus-datasource"
+dynamic = ["version"]
+description = "mdsplus datasource plugin for tokamunch"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+  "numpy",
+  "tokamunch",
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest",
+]
+
+[project.entry-points."tokamunch.data_sources"]
+tokamunch_mdsplus_datasource = "tokamunch_mdsplus_datasource.plugin:create_data_source"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
+local_scheme = "no-local-version"
+write_to = "src/tokamunch_mdsplus_datasource/_version.py"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
